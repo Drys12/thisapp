@@ -1,5 +1,6 @@
 package pl.swiebodzin.pzs.thisapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
             counter--;
             przycisk.setText(String.valueOf(counter));
             if (counter ==0) {
-             shiftPlayer(currentPlayer);
+                checkCounter();
+                shiftPlayer(currentPlayer);
+
             }
 
             int number = Integer.parseInt(currentNumber.getText().toString());
@@ -121,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
     public int getNumberFromEditText(){
 
         try {
@@ -135,8 +137,18 @@ public class MainActivity extends AppCompatActivity {
     public void checkCounter(){
         if (counter== 0){
             globalCounter--;
+            if(globalCounter == 0){
+                getGameOverActivity();
+            }
         }
     }
+    public void getGameOverActivity(){
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
+
+    }
+
+
 }
 
 
